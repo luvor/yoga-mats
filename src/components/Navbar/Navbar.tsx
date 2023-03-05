@@ -1,0 +1,33 @@
+import React from 'react'
+
+import { AiOutlineShoppingCart } from 'react-icons/ai'
+import { GiHamburgerMenu } from 'react-icons/gi'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { useAppSelector } from '../../store'
+import { ICartItem } from '../../store/cart.slice'
+
+const Navbar = () => {
+  const cartItems = useAppSelector((state) => state.cart.items) as ICartItem[]
+
+  return (
+    <div className="h-[60px] shadow-sm w-full bg-white flex justify-between items-center">
+      <div className="flex justify-center items-center ">
+        <Link to={'/'}>
+          <h1 className="text-2xl ml-4">ChuChuMats</h1>
+        </Link>
+      </div>
+
+      <div className="px-5 relative">
+        <span className="rounded-full w-[15px] h-[15px] flex justify-center items-center align-baseline font-bold text-[9px] p-1 bg-[red] text-white absolute -top-1 ml-[1.20rem]">
+          {cartItems.length}
+        </span>
+        <Link to={'/cart'}>
+          <AiOutlineShoppingCart className="text-[25px]" />
+        </Link>
+      </div>
+    </div>
+  )
+}
+
+export default Navbar
